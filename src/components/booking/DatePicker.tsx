@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface DatePickerProps {
   date: Date | undefined;
@@ -17,6 +18,7 @@ interface DatePickerProps {
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({ date, onDateChange }) => {
+  const { t } = useLanguage();
   const [calendarOpen, setCalendarOpen] = useState(false);
   
   const today = new Date();
@@ -28,7 +30,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ date, onDateChange }) => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-serif">Select Date</h3>
+        <h3 className="text-lg font-serif">{t("date.select")}</h3>
         <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
           <PopoverTrigger asChild>
             <Button 
@@ -36,7 +38,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ date, onDateChange }) => {
               className="enoia-button-outline inline-flex items-center"
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {date ? format(date, "PPP") : <span>Pick a date</span>}
+              {date ? format(date, "PPP") : <span>{t("date.pick-a-date")}</span>}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0 bg-white/95 backdrop-blur-sm border border-enoia-sand" align="center">
@@ -68,7 +70,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ date, onDateChange }) => {
             onClick={() => onDateChange(quickDate)}
           >
             <span className="text-sm font-medium">
-              {isToday(quickDate) ? "Today" : format(quickDate, "EEEE")}
+              {isToday(quickDate) ? t("date.today") : format(quickDate, "EEEE")}
             </span>
             <span className="text-2xl font-serif">{format(quickDate, "d")}</span>
             <span className="text-xs text-muted-foreground">{format(quickDate, "MMMM")}</span>
@@ -78,7 +80,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ date, onDateChange }) => {
 
       <div className="mt-6 flex justify-center items-center space-x-1 text-muted-foreground">
         <CalendarIcon className="h-3 w-3 opacity-70" />
-        <span className="text-xs">Classes available 7 days a week</span>
+        <span className="text-xs">{t("date.classes-available")}</span>
       </div>
     </div>
   );

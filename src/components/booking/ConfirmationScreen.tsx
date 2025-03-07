@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { ClassType } from "./ClassCard";
 import { TimeSlotType } from "./TimeSlot";
 import { BookingFormData } from "./BookingForm";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ConfirmationScreenProps {
   selectedClass: ClassType;
@@ -23,6 +24,7 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
   formData,
   onReset,
 }) => {
+  const { t } = useLanguage();
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
@@ -63,13 +65,13 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
         <CheckCircle size={40} className="text-enoia-brown" />
       </div>
 
-      <h2 className="text-2xl font-serif mb-2 text-center">Booking Confirmed</h2>
+      <h2 className="text-2xl font-serif mb-2 text-center">{t("confirmation.booking-confirmed")}</h2>
       <p className="text-muted-foreground text-center mb-8">
-        We can't wait to move with you at Enoia. Your space is ready.
+        {t("confirmation.welcome-message")}
       </p>
 
       <div className="enoia-card p-6 w-full max-w-md mb-8">
-        <h3 className="text-lg font-serif mb-4 text-center">Booking Details</h3>
+        <h3 className="text-lg font-serif mb-4 text-center">{t("confirmation.booking-details")}</h3>
 
         <div className="space-y-4">
           <div className="flex items-start space-x-3">
@@ -77,7 +79,7 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
               <CalendarDays size={14} className="text-enoia-brown" />
             </div>
             <div>
-              <p className="text-sm font-medium">Date</p>
+              <p className="text-sm font-medium">{t("confirmation.date")}</p>
               <p className="text-base">{format(selectedDate, "EEEE, MMMM d, yyyy")}</p>
             </div>
           </div>
@@ -87,8 +89,8 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
               <Clock size={14} className="text-enoia-brown" />
             </div>
             <div>
-              <p className="text-sm font-medium">Time</p>
-              <p className="text-base">{selectedTime.time} with {selectedTime.instructor}</p>
+              <p className="text-sm font-medium">{t("confirmation.time")}</p>
+              <p className="text-base">{selectedTime.time} {t("time.with")} {selectedTime.instructor}</p>
             </div>
           </div>
 
@@ -97,10 +99,10 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
               <span className="text-xs text-enoia-brown font-medium">C</span>
             </div>
             <div>
-              <p className="text-sm font-medium">Class</p>
-              <p className="text-base">{selectedClass.name}</p>
+              <p className="text-sm font-medium">{t("confirmation.class")}</p>
+              <p className="text-base">{t(selectedClass.name)}</p>
               <p className="text-xs text-muted-foreground mt-1">
-                Intensity: <span className="capitalize">{selectedClass.intensity}</span>
+                {t("class.intensity")}: <span className="capitalize">{t(`intensity.${selectedClass.intensity}`)}</span>
               </p>
             </div>
           </div>
@@ -110,7 +112,7 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
               <User size={14} className="text-enoia-brown" />
             </div>
             <div>
-              <p className="text-sm font-medium">Client</p>
+              <p className="text-sm font-medium">{t("confirmation.client")}</p>
               <p className="text-base">{formData.firstName} {formData.lastName}</p>
               <p className="text-sm text-muted-foreground">{formData.email}</p>
               {formData.phone && (
@@ -123,7 +125,7 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
 
       <div className="text-sm text-muted-foreground text-center mb-6 max-w-md">
         <p>
-          A confirmation email has been sent to {formData.email}. Please arrive 15 minutes before class starts.
+          {t("confirmation.email-sent")} {formData.email}. {t("confirmation.arrive-early")}
         </p>
       </div>
 
@@ -131,7 +133,7 @@ const ConfirmationScreen: React.FC<ConfirmationScreenProps> = ({
         onClick={onReset} 
         className="enoia-button-secondary"
       >
-        Book Another Class
+        {t("confirmation.book-another")}
       </Button>
     </div>
   );

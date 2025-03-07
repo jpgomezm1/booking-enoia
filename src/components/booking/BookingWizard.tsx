@@ -9,50 +9,51 @@ import TimeSlot, { TimeSlotType } from "./TimeSlot";
 import BookingForm, { BookingFormData } from "./BookingForm";
 import ConfirmationScreen from "./ConfirmationScreen";
 import PageTransition from "../layout/PageTransition";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Sample data
 const CLASSES: ClassType[] = [
   {
     id: "signature-barre",
-    name: "Signature Barre",
-    description: "Our foundational class combines elements of ballet, Pilates, and yoga to create a full-body workout that improves posture, flexibility, and strength.",
+    name: "class.signature-barre.name",
+    description: "class.signature-barre.description",
     intensity: "medium",
-    suitableFor: ["All levels", "Beginners welcome"],
+    suitableFor: ["audience.all-levels", "audience.beginners-welcome"],
   },
   {
     id: "barre-fusion",
-    name: "Barre Fusion",
-    description: "An energetic blend of barre with cardio intervals to boost stamina and calorie burn while sculpting and toning muscles.",
+    name: "class.barre-fusion.name",
+    description: "class.barre-fusion.description",
     intensity: "strong",
-    suitableFor: ["Intermediate", "Advanced"],
+    suitableFor: ["audience.intermediate", "audience.advanced"],
   },
   {
     id: "barre-stretch",
-    name: "Barre Stretch",
-    description: "A gentle, restorative class focusing on deep stretching and relaxation, perfect for recovery days or improving flexibility.",
+    name: "class.barre-stretch.name",
+    description: "class.barre-stretch.description",
     intensity: "gentle",
-    suitableFor: ["All levels", "Recovery"],
+    suitableFor: ["audience.all-levels", "audience.recovery"],
   },
   {
     id: "prenatal-barre",
-    name: "Pre-natal Barre",
-    description: "Specially designed for expectant mothers, this class provides a safe, effective workout to maintain strength and flexibility during pregnancy.",
+    name: "class.prenatal-barre.name",
+    description: "class.prenatal-barre.description",
     intensity: "gentle",
-    suitableFor: ["Expectant mothers", "All trimesters"],
+    suitableFor: ["audience.expectant-mothers", "audience.all-trimesters"],
   },
   {
     id: "private-barre",
-    name: "Private Barre",
-    description: "One-on-one sessions tailored to your specific needs and goals, providing personalized attention and customized routines.",
+    name: "class.private-barre.name",
+    description: "class.private-barre.description",
     intensity: "medium",
-    suitableFor: ["All levels", "Personalized"],
+    suitableFor: ["audience.all-levels", "audience.personalized"],
   },
   {
     id: "barre-sculpt",
-    name: "Barre & Sculpt",
-    description: "Focus on muscle definition with targeted toning exercises using light weights and high repetitions for a sculpted physique.",
+    name: "class.barre-sculpt.name",
+    description: "class.barre-sculpt.description",
     intensity: "strong",
-    suitableFor: ["Intermediate", "Advanced"],
+    suitableFor: ["audience.intermediate", "audience.advanced"],
   },
 ];
 
@@ -69,15 +70,8 @@ const generateTimeSlots = (): TimeSlotType[] => {
   }));
 };
 
-const STEPS = [
-  { name: "Class", description: "Choose your class type" },
-  { name: "Date", description: "Select your preferred date" },
-  { name: "Time", description: "Pick an available time slot" },
-  { name: "Details", description: "Complete your booking information" },
-  { name: "Confirmation", description: "Your booking is confirmed" },
-];
-
 const BookingWizard: React.FC = () => {
+  const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedClass, setSelectedClass] = useState<ClassType | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -91,6 +85,14 @@ const BookingWizard: React.FC = () => {
     message: "",
   });
   const [direction, setDirection] = useState<"right" | "left">("right");
+
+  const STEPS = [
+    { name: t("step.class"), description: t("step.class.description") },
+    { name: t("step.date"), description: t("step.date.description") },
+    { name: t("step.time"), description: t("step.time.description") },
+    { name: t("step.details"), description: t("step.details.description") },
+    { name: t("step.confirmation"), description: t("step.confirmation.description") },
+  ];
 
   // Generate time slots when date changes
   useEffect(() => {
@@ -190,7 +192,7 @@ const BookingWizard: React.FC = () => {
           <div className="mb-10">
             <h1 className="text-3xl md:text-4xl font-serif text-center mb-6">
               {currentStep === 0 ? (
-                "Book Your Barre Experience"
+                t("app.title")
               ) : (
                 STEPS[currentStep].name
               )}
@@ -258,7 +260,7 @@ const BookingWizard: React.FC = () => {
           {currentStep === 2 && selectedDate && (
             <PageTransition isVisible={true} direction={direction}>
               <div className="space-y-6">
-                <h3 className="text-lg font-serif">Select Time</h3>
+                <h3 className="text-lg font-serif">{t("time.select")}</h3>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {availableTimeSlots.map((timeSlot) => (
@@ -304,7 +306,7 @@ const BookingWizard: React.FC = () => {
                   className="enoia-button-outline"
                 >
                   <ChevronLeft className="mr-2 h-4 w-4" />
-                  Back
+                  {t("nav.back")}
                 </Button>
               ) : (
                 <div />
@@ -316,7 +318,7 @@ const BookingWizard: React.FC = () => {
                   disabled={isNextDisabled()}
                   className="enoia-button-primary"
                 >
-                  Next
+                  {t("nav.next")}
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
               )}

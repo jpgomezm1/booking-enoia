@@ -1,18 +1,14 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface LanguageToggleProps {
   className?: string;
 }
 
 const LanguageToggle: React.FC<LanguageToggleProps> = ({ className }) => {
-  const [language, setLanguage] = useState<"en" | "es">("en");
-
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "es" : "en");
-  };
+  const { language, toggleLanguage } = useLanguage();
 
   return (
     <Button

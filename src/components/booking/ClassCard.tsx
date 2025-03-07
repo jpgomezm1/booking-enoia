@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export interface ClassType {
   id: string;
@@ -19,6 +20,7 @@ interface ClassCardProps {
 }
 
 const ClassCard: React.FC<ClassCardProps> = ({ classInfo, selected, onSelect }) => {
+  const { t } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
 
   const intensityColors = {
@@ -57,7 +59,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ classInfo, selected, onSelect }) 
         {classInfo.image ? (
           <img 
             src={classInfo.image} 
-            alt={classInfo.name} 
+            alt={t(classInfo.name)} 
             className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
           />
         ) : (
@@ -68,23 +70,23 @@ const ClassCard: React.FC<ClassCardProps> = ({ classInfo, selected, onSelect }) 
       </div>
 
       <h3 className="text-xl font-serif mb-2 transition-colors duration-300 group-hover:text-enoia-brown">
-        {classInfo.name}
+        {t(classInfo.name)}
       </h3>
       
       <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-        {classInfo.description}
+        {t(classInfo.description)}
       </p>
       
       <div className="flex items-center justify-between mt-auto">
         <div className="flex items-center gap-1">
-          <span className="text-xs">Intensity:</span>
+          <span className="text-xs">{t("class.intensity")}:</span>
           <span 
             className={cn(
               "inline-block h-2 w-2 rounded-full ml-1",
               intensityColors[classInfo.intensity]
             )}
           />
-          <span className="text-xs capitalize ml-1">{classInfo.intensity}</span>
+          <span className="text-xs capitalize ml-1">{t(`intensity.${classInfo.intensity}`)}</span>
         </div>
       </div>
       
@@ -94,7 +96,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ classInfo, selected, onSelect }) 
             key={index} 
             className="text-xs px-2 py-1 bg-enoia-beige/80 rounded-full"
           >
-            {suitable}
+            {t(suitable)}
           </span>
         ))}
       </div>

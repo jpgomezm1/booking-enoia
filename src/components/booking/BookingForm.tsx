@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export interface BookingFormData {
   firstName: string;
@@ -25,6 +26,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
   onFormChange,
   onSubmit,
 }) => {
+  const { t } = useLanguage();
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (
@@ -50,16 +52,16 @@ const BookingForm: React.FC<BookingFormProps> = ({
     const newErrors: Record<string, string> = {};
 
     if (!formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
+      newErrors.firstName = t("validation.first-name-required");
     }
 
     if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
+      newErrors.lastName = t("validation.last-name-required");
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim() || !emailRegex.test(formData.email)) {
-      newErrors.email = "Valid email is required";
+      newErrors.email = t("validation.email-required");
     }
 
     setErrors(newErrors);
@@ -75,12 +77,12 @@ const BookingForm: React.FC<BookingFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <h3 className="text-lg font-serif">Personal Details</h3>
+      <h3 className="text-lg font-serif">{t("form.personal-details")}</h3>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="firstName" className="enoia-label">
-            First Name
+            {t("form.first-name")}
           </Label>
           <Input
             id="firstName"
@@ -91,7 +93,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             )}
             value={formData.firstName}
             onChange={handleChange}
-            placeholder="Your first name"
+            placeholder={t("form.your-first-name")}
           />
           {errors.firstName && (
             <p className="text-xs text-destructive">{errors.firstName}</p>
@@ -100,7 +102,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         
         <div className="space-y-2">
           <Label htmlFor="lastName" className="enoia-label">
-            Last Name
+            {t("form.last-name")}
           </Label>
           <Input
             id="lastName"
@@ -111,7 +113,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
             )}
             value={formData.lastName}
             onChange={handleChange}
-            placeholder="Your last name"
+            placeholder={t("form.your-last-name")}
           />
           {errors.lastName && (
             <p className="text-xs text-destructive">{errors.lastName}</p>
@@ -121,7 +123,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
       
       <div className="space-y-2">
         <Label htmlFor="email" className="enoia-label">
-          Email
+          {t("form.email")}
         </Label>
         <Input
           id="email"
@@ -133,7 +135,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
           )}
           value={formData.email}
           onChange={handleChange}
-          placeholder="your.email@example.com"
+          placeholder={t("form.your-email")}
         />
         {errors.email && (
           <p className="text-xs text-destructive">{errors.email}</p>
@@ -142,7 +144,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
       
       <div className="space-y-2">
         <Label htmlFor="phone" className="enoia-label">
-          Phone (Optional)
+          {t("form.phone")}
         </Label>
         <Input
           id="phone"
@@ -151,13 +153,13 @@ const BookingForm: React.FC<BookingFormProps> = ({
           className="enoia-input"
           value={formData.phone}
           onChange={handleChange}
-          placeholder="+57 300 000 0000"
+          placeholder={t("form.your-phone")}
         />
       </div>
       
       <div className="space-y-2">
         <Label htmlFor="message" className="enoia-label">
-          Special Requests (Optional)
+          {t("form.message")}
         </Label>
         <Textarea
           id="message"
@@ -165,7 +167,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
           className="enoia-input min-h-24 resize-none"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Let us know if you have any special requests or need accommodations"
+          placeholder={t("form.special-requests")}
         />
       </div>
       
@@ -173,7 +175,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
         type="submit" 
         className="enoia-button-primary w-full mt-6"
       >
-        Confirm Booking
+        {t("form.confirm-booking")}
       </Button>
     </form>
   );
