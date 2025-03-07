@@ -10,6 +10,7 @@ import ConfirmationScreen from "./ConfirmationScreen";
 import PageTransition from "../layout/PageTransition";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import BarreInfoDrawer from "./BarreInfoDrawer";
 
 // Sample data with expanded content for class browsing
 const CLASSES: ClassType[] = [
@@ -294,14 +295,18 @@ const BookingWizard: React.FC = () => {
             <p className="text-sm text-center text-muted-foreground max-w-xl mx-auto">
               {STEPS[currentStep].description}
             </p>
+            
+            {currentStep === 0 && (
+              <div className="flex justify-center mt-4">
+                <BarreInfoDrawer className="mx-auto" />
+              </div>
+            )}
           </motion.div>
         )}
         
         <div className="max-w-3xl mx-auto bg-white/40 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-sm border border-enoia-sand/50">
           {currentStep === 0 && (
             <PageTransition isVisible={true} direction={direction}>
-              {renderBarreIntroduction()}
-              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {CLASSES.map((classInfo) => (
                   <ClassCard
