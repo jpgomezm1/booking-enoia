@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,6 +9,7 @@ import BookingForm, { BookingFormData } from "./BookingForm";
 import ConfirmationScreen from "./ConfirmationScreen";
 import PageTransition from "../layout/PageTransition";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
 
 // Sample data
 const CLASSES: ClassType[] = [
@@ -167,30 +167,24 @@ const BookingWizard: React.FC = () => {
   const renderBackgroundBlobs = () => {
     return (
       <>
-        <div 
-          className="organic-blob w-64 h-64 top-[-20%] left-[-10%] animate-float"
-          style={{ animationDelay: "0s" }}
-        />
-        <div 
-          className="organic-blob w-72 h-72 bottom-[-10%] right-[-20%] animate-float"
-          style={{ animationDelay: "1.5s" }}
-        />
-        <div 
-          className="organic-blob w-48 h-48 top-[40%] left-[-15%] animate-float" 
-          style={{ animationDelay: "3s" }}
-        />
+        {/* We'll remove this since we're adding blobs to the main layout */}
       </>
     );
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-enoia-beige to-enoia-cream">
+    <div className="relative">
       {renderBackgroundBlobs()}
       
       <div className="enoia-container py-8 md:py-16 relative z-10">
         {currentStep < STEPS.length - 1 && (
-          <div className="mb-10">
-            <h1 className="text-3xl md:text-4xl font-serif text-center mb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-10"
+          >
+            <h1 className="text-3xl md:text-4xl font-serif text-center mb-6 text-enoia-brown">
               {currentStep === 0 ? (
                 t("app.title")
               ) : (
@@ -198,7 +192,7 @@ const BookingWizard: React.FC = () => {
               )}
             </h1>
             
-            <div className="hidden sm:flex justify-center items-center space-x-2 mb-4">
+            <div className="hidden sm:flex justify-center items-center space-x-2 mb-6 px-4">
               {STEPS.map((step, index) => (
                 <div key={index} className="flex items-center">
                   <div 
@@ -217,7 +211,7 @@ const BookingWizard: React.FC = () => {
                   {index < STEPS.length - 1 && (
                     <div 
                       className={cn(
-                        "step-connector",
+                        "step-connector w-12 md:w-20",
                         currentStep > index ? "step-connector-active" : ""
                       )}
                     />
@@ -226,13 +220,13 @@ const BookingWizard: React.FC = () => {
               ))}
             </div>
             
-            <p className="text-sm text-center text-muted-foreground">
+            <p className="text-sm text-center text-muted-foreground max-w-xl mx-auto">
               {STEPS[currentStep].description}
             </p>
-          </div>
+          </motion.div>
         )}
         
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto bg-white/40 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-sm border border-enoia-sand/50">
           {currentStep === 0 && (
             <PageTransition isVisible={true} direction={direction}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

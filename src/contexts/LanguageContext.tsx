@@ -16,6 +16,20 @@ type TranslationsType = {
 
 // All translations for the app
 const translations: TranslationsType = {
+  // Welcome Message
+  "welcome.title": {
+    en: "Welcome to Enoia Barre",
+    es: "Bienvenido a Enoia Barre"
+  },
+  "welcome.message": {
+    en: "Discover the perfect harmony of movement, strength, and mindfulness in our sanctuary. We invite you to explore our classes and join our community of conscious movement.",
+    es: "Descubre la perfecta armonía de movimiento, fuerza y mindfulness en nuestro santuario. Te invitamos a explorar nuestras clases y unirte a nuestra comunidad de movimiento consciente."
+  },
+  "welcome.button": {
+    en: "Start My Journey",
+    es: "Comenzar Mi Experiencia"
+  },
+  
   // General
   "app.title": {
     en: "Book Your Barre Experience",
