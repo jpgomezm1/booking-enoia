@@ -33,11 +33,17 @@ interface ClassCardProps {
 const ClassCard: React.FC<ClassCardProps> = ({ classInfo, selected, onSelect }) => {
   const { t } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const intensityColors = {
     gentle: "bg-enoia-green",
     medium: "bg-enoia-taupe",
     strong: "bg-enoia-brown",
+  };
+
+  const handleDialogSelect = () => {
+    onSelect();
+    setIsDialogOpen(false);
   };
 
   return (
@@ -59,7 +65,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ classInfo, selected, onSelect }) 
           </div>
         )}
         
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild onClick={(e) => e.stopPropagation()}>
             <button className="flex items-center justify-center bg-enoia-taupe/80 hover:bg-enoia-taupe text-white rounded-full w-6 h-6 transition-colors">
               <Info size={14} />
@@ -126,10 +132,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ classInfo, selected, onSelect }) 
               <div className="pt-4 border-t border-enoia-sand mt-4">
                 <Button 
                   className="w-full enoia-button-primary"
-                  onClick={() => {
-                    onSelect();
-                    document.querySelector('[role="dialog"]')?.querySelector('button[aria-label="Close"]')?.click();
-                  }}
+                  onClick={handleDialogSelect}
                 >
                   {t("class.select")}
                 </Button>
