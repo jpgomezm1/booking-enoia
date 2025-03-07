@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type LanguageContextType = {
@@ -34,6 +33,48 @@ const translations: TranslationsType = {
   "app.title": {
     en: "Book Your Barre Experience",
     es: "Reserva Tu Experiencia de Barre"
+  },
+  
+  // Barre Information
+  "barre.what-is-title": {
+    en: "What is Barre?",
+    es: "¿Qué es Barre?"
+  },
+  "barre.what-is-description": {
+    en: "Barre is a full-body workout that combines elements of ballet, Pilates, and yoga. It uses precise isometric movements to strengthen and tone muscles, with focus on proper alignment and core engagement. Classes flow through low-impact, high-intensity sequences using the ballet barre for stability.",
+    es: "Barre es un entrenamiento de cuerpo completo que combina elementos de ballet, Pilates y yoga. Utiliza movimientos isométricos precisos para fortalecer y tonificar los músculos, con enfoque en la alineación adecuada y el compromiso del core. Las clases fluyen a través de secuencias de bajo impacto y alta intensidad usando la barra de ballet para estabilidad."
+  },
+  "barre.benefits-title": {
+    en: "Benefits of Barre",
+    es: "Beneficios del Barre"
+  },
+  "barre.benefit-1": {
+    en: "Improved posture and body alignment",
+    es: "Mejora la postura y alineación corporal"
+  },
+  "barre.benefit-2": {
+    en: "Increased muscle strength and tone",
+    es: "Aumenta la fuerza y tono muscular"
+  },
+  "barre.benefit-3": {
+    en: "Enhanced flexibility and range of motion",
+    es: "Mejora la flexibilidad y amplitud de movimiento"
+  },
+  "barre.benefit-4": {
+    en: "Reduced stress and improved mind-body connection",
+    es: "Reduce el estrés y mejora la conexión mente-cuerpo"
+  },
+  "barre.for-who-title": {
+    en: "Who is Barre for?",
+    es: "¿Para quién es Barre?"
+  },
+  "barre.for-who-description": {
+    en: "Barre is for everyone! Regardless of age, fitness level, or dance experience, Barre offers modifications for all bodies and abilities.",
+    es: "¡Barre es para todos! Independientemente de la edad, nivel de condición física o experiencia en danza, Barre ofrece modificaciones para todos los cuerpos y habilidades."
+  },
+  "barre.no-experience": {
+    en: "No dance experience required — just bring your motivation!",
+    es: "No se requiere experiencia en danza — ¡solo trae tu motivación!"
   },
   
   // Steps
@@ -83,6 +124,22 @@ const translations: TranslationsType = {
     en: "Intensity",
     es: "Intensidad"
   },
+  "class.suitable-for": {
+    en: "Suitable for",
+    es: "Adecuado para"
+  },
+  "class.benefits": {
+    en: "Benefits",
+    es: "Beneficios"
+  },
+  "class.duration": {
+    en: "Duration",
+    es: "Duración"
+  },
+  "class.select": {
+    en: "Select This Class",
+    es: "Seleccionar Esta Clase"
+  },
   "intensity.gentle": {
     en: "Gentle",
     es: "Suave"
@@ -94,6 +151,109 @@ const translations: TranslationsType = {
   "intensity.strong": {
     en: "Strong",
     es: "Fuerte"
+  },
+
+  // Class Benefits
+  "benefit.signature-barre.posture": {
+    en: "Improves posture and alignment",
+    es: "Mejora la postura y alineación"
+  },
+  "benefit.signature-barre.strength": {
+    en: "Builds overall body strength",
+    es: "Desarrolla fuerza corporal general"
+  },
+  "benefit.signature-barre.flexibility": {
+    en: "Enhances flexibility",
+    es: "Aumenta la flexibilidad"
+  },
+  "benefit.signature-barre.balance": {
+    en: "Improves balance and coordination",
+    es: "Mejora el equilibrio y coordinación"
+  },
+  
+  "benefit.barre-fusion.cardio": {
+    en: "Effective cardio workout",
+    es: "Entrenamiento cardiovascular efectivo"
+  },
+  "benefit.barre-fusion.endurance": {
+    en: "Builds endurance and stamina",
+    es: "Desarrolla resistencia y vigor"
+  },
+  "benefit.barre-fusion.calorie-burn": {
+    en: "Higher calorie burn",
+    es: "Mayor quema de calorías"
+  },
+  "benefit.barre-fusion.toning": {
+    en: "Rapid muscle toning",
+    es: "Tonificación muscular rápida"
+  },
+  
+  "benefit.barre-stretch.flexibility": {
+    en: "Deep tissue stretching",
+    es: "Estiramiento profundo de tejidos"
+  },
+  "benefit.barre-stretch.relaxation": {
+    en: "Mind-body relaxation",
+    es: "Relajación mente-cuerpo"
+  },
+  "benefit.barre-stretch.recovery": {
+    en: "Aids muscle recovery",
+    es: "Ayuda a la recuperación muscular"
+  },
+  "benefit.barre-stretch.stress-reduction": {
+    en: "Stress reduction",
+    es: "Reducción del estrés"
+  },
+  
+  "benefit.prenatal-barre.safe-exercise": {
+    en: "Safe exercise during pregnancy",
+    es: "Ejercicio seguro durante el embarazo"
+  },
+  "benefit.prenatal-barre.pelvic-floor": {
+    en: "Strengthens pelvic floor muscles",
+    es: "Fortalece los músculos del suelo pélvico"
+  },
+  "benefit.prenatal-barre.circulation": {
+    en: "Improves circulation",
+    es: "Mejora la circulación"
+  },
+  "benefit.prenatal-barre.comfort": {
+    en: "Eases pregnancy discomfort",
+    es: "Alivia las molestias del embarazo"
+  },
+  
+  "benefit.private-barre.personalized": {
+    en: "Personalized attention",
+    es: "Atención personalizada"
+  },
+  "benefit.private-barre.technique": {
+    en: "Perfect technique development",
+    es: "Desarrollo perfecto de la técnica"
+  },
+  "benefit.private-barre.goals": {
+    en: "Focused on your specific goals",
+    es: "Enfocado en tus objetivos específicos"
+  },
+  "benefit.private-barre.adaptations": {
+    en: "Customized adaptations for any needs",
+    es: "Adaptaciones personalizadas para cualquier necesidad"
+  },
+  
+  "benefit.barre-sculpt.definition": {
+    en: "Improves muscle definition",
+    es: "Mejora la definición muscular"
+  },
+  "benefit.barre-sculpt.strength": {
+    en: "Increases strength",
+    es: "Aumenta la fuerza"
+  },
+  "benefit.barre-sculpt.resistance": {
+    en: "Builds resistance with weights",
+    es: "Desarrolla resistencia con pesas"
+  },
+  "benefit.barre-sculpt.sculpting": {
+    en: "Body sculpting focus",
+    es: "Enfoque en esculpir el cuerpo"
   },
   
   // Classes

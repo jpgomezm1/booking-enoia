@@ -11,7 +11,7 @@ import PageTransition from "../layout/PageTransition";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 
-// Sample data
+// Sample data with expanded content for class browsing
 const CLASSES: ClassType[] = [
   {
     id: "signature-barre",
@@ -19,6 +19,13 @@ const CLASSES: ClassType[] = [
     description: "class.signature-barre.description",
     intensity: "medium",
     suitableFor: ["audience.all-levels", "audience.beginners-welcome"],
+    benefits: [
+      "benefit.signature-barre.posture",
+      "benefit.signature-barre.strength",
+      "benefit.signature-barre.flexibility",
+      "benefit.signature-barre.balance"
+    ],
+    duration: "55 min",
   },
   {
     id: "barre-fusion",
@@ -26,6 +33,13 @@ const CLASSES: ClassType[] = [
     description: "class.barre-fusion.description",
     intensity: "strong",
     suitableFor: ["audience.intermediate", "audience.advanced"],
+    benefits: [
+      "benefit.barre-fusion.cardio",
+      "benefit.barre-fusion.endurance",
+      "benefit.barre-fusion.calorie-burn",
+      "benefit.barre-fusion.toning"
+    ],
+    duration: "60 min",
   },
   {
     id: "barre-stretch",
@@ -33,6 +47,13 @@ const CLASSES: ClassType[] = [
     description: "class.barre-stretch.description",
     intensity: "gentle",
     suitableFor: ["audience.all-levels", "audience.recovery"],
+    benefits: [
+      "benefit.barre-stretch.flexibility",
+      "benefit.barre-stretch.relaxation",
+      "benefit.barre-stretch.recovery",
+      "benefit.barre-stretch.stress-reduction"
+    ],
+    duration: "45 min",
   },
   {
     id: "prenatal-barre",
@@ -40,6 +61,13 @@ const CLASSES: ClassType[] = [
     description: "class.prenatal-barre.description",
     intensity: "gentle",
     suitableFor: ["audience.expectant-mothers", "audience.all-trimesters"],
+    benefits: [
+      "benefit.prenatal-barre.safe-exercise",
+      "benefit.prenatal-barre.pelvic-floor",
+      "benefit.prenatal-barre.circulation",
+      "benefit.prenatal-barre.comfort"
+    ],
+    duration: "50 min",
   },
   {
     id: "private-barre",
@@ -47,6 +75,13 @@ const CLASSES: ClassType[] = [
     description: "class.private-barre.description",
     intensity: "medium",
     suitableFor: ["audience.all-levels", "audience.personalized"],
+    benefits: [
+      "benefit.private-barre.personalized",
+      "benefit.private-barre.technique",
+      "benefit.private-barre.goals",
+      "benefit.private-barre.adaptations"
+    ],
+    duration: "60 min",
   },
   {
     id: "barre-sculpt",
@@ -54,6 +89,13 @@ const CLASSES: ClassType[] = [
     description: "class.barre-sculpt.description",
     intensity: "strong",
     suitableFor: ["audience.intermediate", "audience.advanced"],
+    benefits: [
+      "benefit.barre-sculpt.definition",
+      "benefit.barre-sculpt.strength",
+      "benefit.barre-sculpt.resistance",
+      "benefit.barre-sculpt.sculpting"
+    ],
+    duration: "55 min",
   },
 ];
 
@@ -172,6 +214,35 @@ const BookingWizard: React.FC = () => {
     );
   };
 
+  const renderBarreIntroduction = () => {
+    return (
+      <div className="mb-8 bg-white/60 backdrop-blur-sm rounded-lg p-6 border border-enoia-sand/50">
+        <h2 className="text-2xl font-serif mb-3 text-enoia-brown">{t("barre.what-is-title")}</h2>
+        <p className="text-sm mb-4">{t("barre.what-is-description")}</p>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div className="rounded-md p-4 bg-enoia-beige/50">
+            <h3 className="text-lg font-serif mb-2">{t("barre.benefits-title")}</h3>
+            <ul className="space-y-2">
+              {[1, 2, 3, 4].map((num) => (
+                <li key={num} className="flex items-start gap-2 text-sm">
+                  <span className="inline-block h-2 w-2 rounded-full bg-enoia-sage mt-2" />
+                  <span>{t(`barre.benefit-${num}`)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div className="rounded-md p-4 bg-enoia-beige/50">
+            <h3 className="text-lg font-serif mb-2">{t("barre.for-who-title")}</h3>
+            <p className="text-sm mb-2">{t("barre.for-who-description")}</p>
+            <p className="text-sm italic">{t("barre.no-experience")}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="relative">
       {renderBackgroundBlobs()}
@@ -229,6 +300,8 @@ const BookingWizard: React.FC = () => {
         <div className="max-w-3xl mx-auto bg-white/40 backdrop-blur-sm rounded-xl p-6 md:p-8 shadow-sm border border-enoia-sand/50">
           {currentStep === 0 && (
             <PageTransition isVisible={true} direction={direction}>
+              {renderBarreIntroduction()}
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {CLASSES.map((classInfo) => (
                   <ClassCard

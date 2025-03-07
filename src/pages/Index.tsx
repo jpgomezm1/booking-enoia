@@ -17,6 +17,8 @@ const Index = () => {
                style={{ animationDelay: "2s" }} />
           <div className="organic-blob w-64 h-64 top-[30%] right-[-20%] animate-float opacity-20" 
                style={{ animationDelay: "4s" }} />
+          <div className="organic-blob w-72 h-72 bottom-[20%] left-[-10%] animate-float opacity-25" 
+               style={{ animationDelay: "6s" }} />
         </div>
         
         {/* Language Toggle */}
